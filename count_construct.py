@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 def count_construct(target_word: str, word_bank: List[str]) -> int:
     """_Counts how many ways there are to construct a word by concatenating words from a list_
 
@@ -18,9 +18,42 @@ def count_construct(target_word: str, word_bank: List[str]) -> int:
             count += count_construct(target_word=new_target_word, word_bank=word_bank)
     return count
 
+def count_construct_memo(target_word: str, word_bank: List[str], memo: Dict[str, int]={"": 1})-> int:
+    """_Counts how many ways there are to construct a given word by concatenating words from a given list_
+
+    Args:
+        target_word (str): _Word to construct_
+        word_bank (List[str]): _A lit of words to use,a word can be used multiple times_
+        memo (Dict[str, int], optional): _Dictionary of already evaluated word and count key value pair_. Defaults to {"": 1}.
+
+    Returns:
+        int: _Number of times word can be constructed using various words in the str_
+    """
+    count: int = 0
+
+    if target_word in memo:
+        return memo[target_word]
+    for word in word_bank:
+        if target_word.startswith(word):
+            new_target_word: str = target_word.removeprefix(word)
+            count += count_construct_memo(target_word=new_target_word, word_bank=word_bank, memo=memo)
+            memo[target_word] = count
+    memo[target_word] = count
+    return memo[target_word]
+
 def main()-> None:
     target_word: str = 'abcdef'
     word_bank: List[str] = ['ab', 'abc', 'cd', 'def', 'abcd']
+    count: int = count_construct_memo(target_word=target_word, word_bank=word_bank)
+    print(f"Number of ways to construct '{target_word}' by concatenating str(s) in {word_bank} is {count}")
+
+    target_word: str = 'purple'
+    word_bank: List[str] = ['purp', 'p', 'ur', 'le', 'purpl']
+    count: int = count_construct(target_word=target_word, word_bank=word_bank) #Should yield 2
+    print(f"Number of ways to construct '{target_word}' by concatenating str(s) in {word_bank} is {count}")
+
+    target_word: str = 'enterapotentpot'
+    word_bank: List[str] = ['a', 'p', 'ent', 'enter', 'ot', 'o', 't']
     count: int = count_construct(target_word=target_word, word_bank=word_bank)
     print(f"Number of ways to construct {target_word} by concatenating str(s) in {word_bank} is {count}")
 
