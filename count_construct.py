@@ -18,13 +18,16 @@ def count_construct(target_word: str, word_bank: List[str]) -> int:
             count += count_construct(target_word=new_target_word, word_bank=word_bank)
     return count
 
-def count_construct_memo(target_word: str, word_bank: List[str], memo: Dict[str, int]={"": 1}):
-    """_summary_
+def count_construct_memo(target_word: str, word_bank: List[str], memo: Dict[str, int]={"": 1})-> int:
+    """_Counts how many ways there are to construct a given word by concatenating words from a given list_
 
     Args:
-        target_word (str): _description_
-        word_bank (List[str]): _description_
-        memo (_type_, optional): _description_. Defaults to {"": 1}.
+        target_word (str): _Word to construct_
+        word_bank (List[str]): _A lit of words to use,a word can be used multiple times_
+        memo (Dict[str, int], optional): _Dictionary of already evaluated word and count key value pair_. Defaults to {"": 1}.
+
+    Returns:
+        int: _Number of times word can be constructed using various words in the str_
     """
     count: int = 0
 
