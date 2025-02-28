@@ -22,6 +22,16 @@ def main()-> None:
     target_word: str = 'abcdef'
     word_bank: List[str] = ['ab', 'abc', 'cd', 'def', 'abcd']
     count: int = count_construct(target_word=target_word, word_bank=word_bank)
+    print(f"Number of ways to construct '{target_word}' by concatenating str(s) in {word_bank} is {count}")
+
+    target_word: str = 'purple'
+    word_bank: List[str] = ['purp', 'p', 'ur', 'le', 'purpl']
+    count: int = count_construct(target_word=target_word, word_bank=word_bank) #Should yield 2
+    print(f"Number of ways to construct '{target_word}' by concatenating str(s) in {word_bank} is {count}")
+
+    target_word: str = 'enterapotentpot'
+    word_bank: List[str] = ['a', 'p', 'ent', 'enter', 'ot', 'o', 't']
+    count: int = count_construct(target_word=target_word, word_bank=word_bank)
     print(f"Number of ways to construct {target_word} by concatenating str(s) in {word_bank} is {count}")
 
 if __name__ =="__main__":
