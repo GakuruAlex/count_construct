@@ -1,5 +1,14 @@
 from typing import List
 def count_construct(target_word: str, word_bank: List[str]) -> int:
+    """_Counts how many ways there are to construct a word by concatenating words from a list_
+
+    Args:
+        target_word (str): _Word to construct_
+        word_bank (List[str]): _A list of words to use, a word maybe reused multiple times_
+
+    Returns:
+        int: _Number of times word can be constructed using various words in the str_
+    """
     count: int = 0
     if target_word == "":
         return 1
